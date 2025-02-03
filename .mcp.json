@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "pica": {
+      "command": "npx",
+      "args": ["@picahq/mcp"],
+      "env": {
+        "PICA_SECRET": "your-pica-secret-key-here"
+      }
+    }
+  }
+}
