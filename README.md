@@ -1,6 +1,6 @@
 # Pica OneTool Demo ✨
 
-![Pica OneTool in Action](https://assets.buildable.dev/catalog/node-templates/onetool-demo.gif)
+![Pica OneTool in Action](demo.gif)
 
 Experience the future of API integration with [Pica OneTool](https://www.npmjs.com/package/@picahq/ai) - a revolutionary platform that connects you to 100+ APIs and tools with a single line of code. Powered by cutting-edge tech including Next.js 14, TypeScript, Tailwind CSS, Vercel AI SDK, and OpenAI, it's the integration solution you've been dreaming of.
 
