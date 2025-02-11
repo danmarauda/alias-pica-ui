@@ -53,17 +53,11 @@ export default function Home() {
           <div className="flex items-center justify-center max-w-[800px] mx-auto w-full">
             <div className="flex items-center justify-between w-full">
 
-              <Image src="/logo-white.svg" alt="Pica Logo" width={150} height={40} className="hover-glow" />
+              <a href="https://picaos.com" target="_blank">
+                <Image src="/logo-white.svg" alt="Pica Logo" width={150} height={40} />
+              </a>
 
               <div className="flex items-center gap-6">
-                <a
-                  href="https://picaos.com"
-                  target="_blank"
-                  className="flex items-center gap-2 text-[rgb(var(--text-dim-rgb))] hover:text-[rgb(var(--primary-green-rgb))] transition-colors text-sm"
-                >
-                  <GlobeIcon size={16} />
-                  <span>picaos.com</span>
-                </a>
                 <a
                   href="https://github.com/picahq/pica"
                   target="_blank"

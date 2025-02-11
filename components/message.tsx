@@ -151,7 +151,7 @@ export const Message = ({
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                               <img
-                                src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform}.svg`}
+                                src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform.toLowerCase()}.svg`}
                                 alt={`${result?.platform} logo`}
                                 className="w-8 h-8"
                                 onError={(e) => {
@@ -180,7 +180,7 @@ export const Message = ({
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                               <img
-                                src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform}.svg`}
+                                src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform.toLowerCase()}.svg`}
                                 alt={`${result?.platform} logo`}
                                 className="w-8 h-8"
                                 onError={(e) => {
@@ -216,7 +216,7 @@ export const Message = ({
                             <div className="flex items-center gap-3">
                               <div className="relative">
                                 <img
-                                  src={`https://assets.buildable.dev/catalog/node-templates/${result.platform}.svg`}
+                                  src={`https://assets.buildable.dev/catalog/node-templates/${result.platform.toLowerCase()}.svg`}
                                   alt={`${result.platform} logo`}
                                   className="w-8 h-8 relative z-10"
                                   onError={(e) => {
