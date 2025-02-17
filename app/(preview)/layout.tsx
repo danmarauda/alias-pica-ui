@@ -1,9 +1,7 @@
 import "./globals.css";
 import { Metadata } from "next";
 import { Toaster } from "sonner";
-import { JetBrains_Mono } from "next/font/google";
-
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
+import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ai-sdk-preview-roundtrips.vercel.app"),
@@ -11,9 +9,9 @@ export const metadata: Metadata = {
   description: "Unleash the Potential of Agentic AI",
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/logo-box.svg', type: 'image/svg+xml' }
-    ]
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo-box.svg", type: "image/svg+xml" },
+    ],
   },
 };
 
@@ -23,9 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
-        <div className={`${jetbrainsMono.className} flex min-h-screen`}>
+        <div className={`${GeistSans.className} flex min-h-screen bg-gradient-to-b from-emerald-900/20 to-black`}>
           <div className="max-w-[1200px] w-full mx-auto px-8">
             <Toaster position="top-center" richColors />
             {children}
