@@ -1,21 +1,27 @@
 import { openai } from "@ai-sdk/openai";
-import { convertToCoreMessages, streamText } from "ai";
+import { convertToCoreMessages, streamText, Message } from "ai";
 import { Pica } from "@picahq/ai";
 
+
 export async function POST(request: Request) {
-  const { messages } = await request.json();
+  const { messages }: { messages: Message[] } = await request.json();
 
   const pica = new Pica(process.env.PICA_SECRET_KEY as string);
 
-  const systemPrompt = await pica.generateSystemPrompt();
+  const system = await pica.generateSystemPrompt();
 
   const stream = streamText({
     model: openai("gpt-4o"),
-    system: systemPrompt,
-    tools: { ...pica.oneTool },
+    system,
+    tools: {
+      ...pica.oneTool,
+    },
+    
     messages: convertToCoreMessages(messages),
-    maxSteps: 10,
+    maxSteps: 20,
   });
+
+  console.log(messages?.[1]?.parts);
 
   return (await stream).toDataStreamResponse();
 }
