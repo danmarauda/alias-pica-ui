@@ -90,12 +90,12 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
               </span>
             </div>
           </div>
-          <div
-            ref={messagesEndRef}
-            className="relative flex items-center justify-center w-full h-[500px] min-h-[500px]"
-          />
         </>
       )}
+      <div
+        ref={messagesEndRef}
+        className="relative flex items-center justify-center w-full h-[500px] min-h-[500px]"
+      />
     </div>
   );
 }
