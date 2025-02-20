@@ -92,10 +92,13 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
           </div>
         </>
       )}
-      <div
-        ref={messagesEndRef}
-        className="relative flex items-center justify-center w-full h-[500px] min-h-[500px]"
-      />
+      
+      {messages.length > 0 && (
+        <div
+          ref={messagesEndRef}
+          className="relative flex items-center justify-center w-full h-[500px] min-h-[500px]"
+        />
+      )}
     </div>
   );
 }
