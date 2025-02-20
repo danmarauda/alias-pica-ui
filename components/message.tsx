@@ -9,6 +9,9 @@ import { ToolInvocation } from "ai";
 import { toast } from "sonner";
 import Image from "next/image";
 import { useState } from "react";
+import KnowledgeCard from "./ui/knowledge-card";
+import { Badge } from "./ui/badge";
+import ExecuteCard, { ExecuteResult } from "./ui/execute-card";
 
 const toTitleCase = (str: string) => {
   return str
@@ -41,6 +44,31 @@ export const TextStreamMessage = ({
   );
 };
 
+interface ActionResult {
+  platform?: string;
+  actions?: any[];
+  action?: string;
+  success: boolean;
+  data?: any;
+  message?: string;
+  raw?: any;
+  title?: string;
+}
+
+// Update the type guard to handle both successful and failed cases
+const isExecuteResult = (result: ActionResult): result is ExecuteResult => {
+  if (!result.success) {
+    // For failed executions, we only need success flag and error details
+    return typeof result.success === 'boolean' && 
+           (typeof result.message === 'string' || typeof result.title === 'string');
+  }
+  
+  // For successful executions, we need action and platform
+  return typeof result.action === 'string' && 
+         typeof result.platform === 'string' && 
+         typeof result.success === 'boolean';
+};
+
 export const Message = ({
   role,
   content,
@@ -51,11 +79,66 @@ export const Message = ({
   toolInvocations: Array<ToolInvocation> | undefined;
 }) => {
   const isUser = role === "user";
-  const [isDataVisible, setIsDataVisible] = useState(false);
+
+
+  // Collect all actions and knowledge from tool invocations
+  const allActions = toolInvocations?.reduce((acc, toolInvocation) => {
+    const { toolName, state } = toolInvocation;
+    const result = (toolInvocation as any).result as ActionResult;
+
+    if (state === "result") {
+      // For execute actions, collect them all (successful and failed)
+      if (toolName === "execute") {
+        if (!acc.executeResults) {
+          acc.executeResults = [];
+        }
+        acc.executeResults.push(result);
+      }
+      // For getAvailableActions, collect actions by platform
+      if (toolName === "getAvailableActions" && result.actions) {
+        const platform = result.platform?.toLowerCase() || 'unknown';
+        if (!acc.platforms[platform]) {
+          acc.platforms[platform] = {
+            name: result.platform || '',
+            actions: []
+          };
+        }
+        // Add platform to each action
+        const actionsWithPlatform = result.actions.map(action => ({
+          ...action,
+          platform: result.platform
+        }));
+        acc.platforms[platform].actions.push(...actionsWithPlatform);
+      }
+      // For getActionKnowledge, store the action knowledge
+      else if (toolName === "getActionKnowledge" && result.action) {
+        if (!acc.knowledge) {
+          acc.knowledge = [];
+        }
+        acc.knowledge.push({
+          platform: result.platform || '',
+          action: result.action
+        });
+      }
+    }
+    return acc;
+  }, { 
+    platforms: {} as Record<string, { name: string; actions: any[] }>,
+    knowledge: [] as Array<{ platform: string; action: any }>,
+    executeResults: [] as ActionResult[]
+  });
+
+  // Calculate total actions across all platforms
+  const totalActions = Object.values(allActions?.platforms || {})
+    .reduce((sum, platform) => sum + platform.actions.length, 0);
+
+  // Filter execute results to ensure they match ExecuteResult type
+  const executeResults = allActions?.executeResults?.filter(isExecuteResult) || [];
+
 
   return (
     <motion.div
-      className={`flex px-4 w-full max-w-3xl md:w-[800px] mx-auto py-4 first:pt-8 ${
+      className={`flex w-full max-w-3xl md:w-[800px] mx-auto py-4 first:pt-8 ${
         isUser ? "justify-end" : ""
       }`}
       initial={{ opacity: 0 }}
@@ -63,234 +146,49 @@ export const Message = ({
     >
       <div
         className={`min-w-0 space-y-4 text-xs text-foreground/70 ${
-          isUser ? "bg-gray-500/20 rounded-full p-4 max-w-[80%]" : ""
+          isUser ? "bg-gray-500/20 rounded-3xl p-4 max-w-[80%]" : ""
         }`}
       >
         {content && <Markdown content={content as string} fontSize="sm" />}
 
-        {toolInvocations && (
+        {toolInvocations && allActions && (
           <div className="space-y-3">
+            {/* Show KnowledgeCard if we have any platforms or knowledge */}
+            {(Object.keys(allActions.platforms).length > 0 || allActions.knowledge.length > 0) && (
+              <KnowledgeCard
+                actions={Object.values(allActions.platforms).flatMap(p => p.actions)}
+                knowledge={allActions.knowledge}
+                platform={Object.values(allActions.platforms)[0]?.name || ''}
+                totalActions={totalActions}
+              />
+            )}
+
+            {/* Show ExecuteCard if we have any valid execute results */}
+            {executeResults.length > 0 && (
+              <ExecuteCard results={executeResults} />
+            )}
+
+            {/* Keep GitHub connection UI */}
             {toolInvocations.map((toolInvocation) => {
               const { toolName, toolCallId, state } = toolInvocation;
 
-              if (state === "result") {
-                const { result } = toolInvocation;
-
-                if (!result?.success) {
-                  return (
-                    <div key={toolCallId} className="text-sm">
-                      <div className="p-3 rounded-md border border-red-500/20 bg-red-500/5">
-                        <div className="flex items-start gap-2">
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="mt-1 text-red-500"
-                          >
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                          </svg>
-                          <div>
-                            <div className="font-medium text-red-500">
-                              Error
-                            </div>
-                            <div className="text-red-400 text-xs">
-                              {result.message}
-                            </div>
-                          </div>
-                        </div>
-                        {result.raw && (
-                          <pre className="mt-2 p-2 text-xs bg-red-500/5 rounded-sm overflow-x-auto">
-                            <code>{JSON.stringify(result.raw, null, 2)}</code>
-                          </pre>
-                        )}
+              if (state === "result" && toolName === "connectGithub") {
+                return (
+                  <div key={toolCallId} className="text-sm">
+                    <div className="p-3 rounded-md border border-blue-500/20 bg-blue-500/10">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={`https://assets.buildable.dev/catalog/node-templates/github.svg`}
+                          alt="GitHub logo"
+                          width={32}
+                          height={32}
+                        />
                       </div>
                     </div>
-                  );
-                }
-
-                if (result?.message || result?.content) {
-                  if (toolName === "getAvailableActions" && result?.actions) {
-                    return (
-                      <div key={toolCallId} className="text-sm">
-                        <div className="p-3 rounded-md border border-blue-500/20 bg-blue-500/10">
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform.toLowerCase()}.svg`}
-                              alt={`${result?.platform} logo`}
-                              width={32}
-                              height={32}
-                              onError={(e) => {
-                                e.currentTarget.src =
-                                  "https://assets.buildable.dev/catalog/node-templates/question.svg";
-                              }}
-                            />
-                            <div>
-                              <div className="font-medium text-blue-600">
-                                Fetched {toTitleCase(result?.platform)} Actions
-                              </div>
-                              <div className="text-gray-500 text-xs">
-                                Found {result?.actions?.length} actions
-                                available
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  if (toolName === "getActionKnowledge" && result?.action) {
-                    return (
-                      <div key={toolCallId} className="text-sm">
-                        <div className="p-3 rounded-md border border-blue-500/20 bg-blue-500/10">
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={`https://assets.buildable.dev/catalog/node-templates/${result?.platform.toLowerCase()}.svg`}
-                              alt={`${result?.platform} logo`}
-                              width={32}
-                              height={32}
-                              onError={(e) => {
-                                e.currentTarget.src =
-                                  "https://assets.buildable.dev/catalog/node-templates/question.svg";
-                              }}
-                            />
-                            <div>
-                              <div className="font-medium text-blue-600">
-                                Fetched Pica Action Knowledge
-                              </div>
-                              <div className="text-gray-500 text-xs">
-                                Loaded knowledge for{" "}
-                                {toTitleCase(result?.action?.title)}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  if (toolName === "execute" && result?.success) {
-                    return (
-                      <div key={toolCallId} className="text-sm">
-                        <div className="p-3 rounded-md border border-emerald-500/20 bg-emerald-500/10">
-                          <div className="flex items-center gap-2 justify-between">
-                            <div className="flex items-center gap-2">
-                              <Image
-                                src={`https://assets.buildable.dev/catalog/node-templates/${result.platform.toLowerCase()}.svg`}
-                                alt={`${result.platform} logo`}
-                                width={32}
-                                height={32}
-                                className="relative z-10"
-                                onError={(e) => {
-                                  e.currentTarget.src =
-                                    "https://assets.buildable.dev/catalog/node-templates/question.svg";
-                                }}
-                              />
-
-                              <div>
-                                <div className="flex items-center justify-start gap-1">
-                                  <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    className=" text-emerald-500"
-                                  >
-                                    <polyline points="20 6 9 17 4 12" />
-                                  </svg>
-                                  <div className="font-medium text-emerald-500">
-                                    Success
-                                  </div>
-                                </div>
-                                <div className="text-emerald-100/40 text-xs">
-                                  {result.action} via{" "}
-                                  {toTitleCase(result.platform)}
-                                </div>
-                              </div>
-                            </div>
-                            {result.data && (
-                              <div className="mt-3">
-                                <button
-                                  onClick={() =>
-                                    setIsDataVisible(!isDataVisible)
-                                  }
-                                  className="flex items-center justify-end px-1 py-1 text-emerald-500 opacity-80 hover:opacity-100 transition-colors rounded-md hover:bg-emerald-500/10 gap-2 ml-auto text-xs"
-                                >
-                                  {isDataVisible ? "Hide" : "Show"} Response
-                                  Data
-                                  <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className={`transform transition-transform ${
-                                      isDataVisible ? "rotate-180" : ""
-                                    }`}
-                                  >
-                                    <polyline points="6 9 12 15 18 9" />
-                                  </svg>
-                                </button>
-                              </div>
-                            )}
-                          </div>
-                          {isDataVisible && (
-                            <div className="relative group mt-2">
-                              <button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(
-                                    JSON.stringify(result.data, null, 2)
-                                  );
-                                  toast.success(
-                                    "Response data copied to clipboard"
-                                  );
-                                }}
-                                className="absolute top-2 right-2 px-1 py-1 text-emerald-500 opacity-80 hover:opacity-100 transition-colors rounded-md hover:bg-emerald-500/10 flex items-center gap-2 z-10"
-                              >
-                                <svg
-                                  width="14"
-                                  height="14"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <rect
-                                    x="9"
-                                    y="9"
-                                    width="13"
-                                    height="13"
-                                    rx="2"
-                                    ry="2"
-                                  />
-                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                </svg>
-                              </button>
-                              <pre className="max-h-[150px] overflow-y-scroll p-2 bg-background/50 border border-emerald-500/20 rounded-lg">
-                                <code className="font-mono whitespace-pre-wrap break-all text-xs">
-                                  {JSON.stringify(result.data, null, 2)}
-                                </code>
-                              </pre>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-                }
+                  </div>
+                );
               }
+              return null;
             })}
           </div>
         )}

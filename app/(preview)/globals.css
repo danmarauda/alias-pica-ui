@@ -7,6 +7,40 @@
   .bg-gradient-radial {
     background-image: radial-gradient(circle, var(--tw-gradient-stops));
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  /* Show scrollbar only when hovering or scrolling */
+  .custom-scrollbar:hover::-webkit-scrollbar,
+  .custom-scrollbar::-webkit-scrollbar:hover,
+  .custom-scrollbar::-webkit-scrollbar:active {
+    opacity: 1;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/10 rounded-full;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb,
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+  .custom-scrollbar::-webkit-scrollbar-thumb:active {
+    opacity: 1;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/20;
+  }
 }
 
 
