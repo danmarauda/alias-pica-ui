@@ -1,49 +1,20 @@
-# Pica OneTool Demo ✨
+# Pica OneTool Demo Chat App ✨
 
 ![Pica OneTool in Action](demo.gif)
 
-Experience the future of API integration with [Pica OneTool](https://www.npmjs.com/package/@picahq/ai) - a revolutionary platform that connects you to 100+ APIs and tools with a single line of code. Powered by cutting-edge tech including Next.js 14, TypeScript, Tailwind CSS, Vercel AI SDK, and OpenAI, it's the integration solution you've been dreaming of.
+[Pica OneTool](https://www.npmjs.com/package/@picahq/ai) is a powerful integration layer that seamlessly connects AI with any API. With automatic handling of schema definitions, authentication flows, and execution processes, it eliminates the complexity of API integrations - allowing you to focus on building great experiences.
 
 ## Overview
 
-Pica OneTool redefines API integration by providing a seamless, AI-powered hub that connects with virtually any service you need. Built on the powerful [@picahq/ai](https://www.npmjs.com/package/@picahq/ai) framework and leveraging the [Vercel AI SDK](https://www.npmjs.com/package/ai) with [OpenAI](https://www.npmjs.com/package/@ai-sdk/openai), it features an intuitive chat interface that lets you execute complex operations across multiple platforms with natural language - no API documentation diving required. Whether you're managing e-commerce platforms, CRM systems, or any other digital service, Pica OneTool handles the complexity so you can focus on what matters.
+A demo chat app showcasing Pica OneTool's capabilities. Built with [@picahq/ai](https://www.npmjs.com/package/@picahq/ai) and the [Vercel AI SDK](https://www.npmjs.com/package/ai), it demonstrates how you can use natural language to interact with various APIs directly through a chat interface.
 
 ## Features
 
-- 🔌 **Universal Integration**: Connect to 100+ APIs through a single interface
-- 🤖 **AI-Powered Assistant**: Natural language interface for executing operations
-- 🔄 **CRUD Operations**: Support for all standard operations (Create, Read, Update, Delete)
-- 📊 **Real-time Capabilities**: Dynamic fetching of platform capabilities and requirements
-- 🎨 **Modern UI**: Beautiful, responsive interface with smooth animations and transitions
-- 🔐 **Type-Safe**: Built with TypeScript for robust type checking
-- 📱 **Responsive Design**: Works seamlessly across desktop and mobile devices
-- 🔍 **Tool Observability**: Collapsible sidebar for monitoring tool executions and responses
-
-
-## Core Capabilities
-
-- **Entity Management**
-  - List available connections
-  - View and manage products
-  - Create new items
-  - Update existing records
-  - Delete records
-  - Count entities
-
-- **Platform Integration**
-  - Real-time capability checking
-  - Required fields validation
-  - Platform-specific model mapping
-  - Error handling and feedback
-
-## Tech Stack
-
-- **Frontend**: Next.js 14, React 18
-- **Styling**: Tailwind CSS
-- **Type Safety**: TypeScript
-- **API Integrations**: Pica
-- **State Management**: React Hooks
-- **UI Components**: Custom components with Tailwind
+- 🔌 **Universal Integration**: Connect with 100+ APIs and use 6000+ actions powered by Pica
+- 🤖 **AI-Powered Assistant**: Natural language interface that understands your intent
+- 🧠 **Smart Execution**: Automatically handles prerequisite actions and complex workflows
+- 📊 **Knowledge Fetching**: Dynamically learns API capabilities and requirements
+- 🔍 **Action Observability**: View success responses and error messages
 
 ## Getting Started
 
@@ -81,13 +52,13 @@ npm run dev
 Here are some example commands you can use to get started:
 
 - What connections are available?
-- What models are supported for Quickbooks?
+- Send an email using gmail to john@doe.com
 - Create a new Shopify product
-- What fields are required for Gmail messages?
-- What caveats are there for Quickbooks Accounts?
-- What actions are supported for Attio contacts?
-
+- Insert a new record into my Postgres database
+- Create a record in Airtable
+- What actions are supported for Attio?
+- Search the web for the best restaurants in SF using Exa
 
 ## Support
 
-For support, please visit [picaos.com](https://picaos.com) or contact our support team.
+Read more about Pica OneTool in the [documentation](https://docs.picaos.com/sdk/vercel-ai) or contact us at [support@picaos.com](mailto:support@picaos.com).
