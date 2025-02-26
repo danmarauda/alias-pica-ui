@@ -2,7 +2,6 @@ import { openai } from "@ai-sdk/openai";
 import { convertToCoreMessages, streamText, Message } from "ai";
 import { Pica } from "@picahq/ai";
 
-
 export async function POST(request: Request) {
   const { messages }: { messages: Message[] } = await request.json();
 
@@ -16,7 +15,6 @@ export async function POST(request: Request) {
     tools: {
       ...pica.oneTool,
     },
-    
     messages: convertToCoreMessages(messages),
     maxSteps: 20,
   });

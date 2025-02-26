@@ -34,7 +34,7 @@ export default function KnowledgeCard({
   }, {} as Record<string, Action[]>);
 
   return (
-    <div className="max-w-lg min-w-lg p-2">
+    <div className="w-full min-w-lg p-2">
       <Card className="bg-background border-border overflow-hidden">
         <CardContent className="p-0">
           {/* Header with Stats */}
