@@ -5,7 +5,9 @@ import { Pica } from "@picahq/ai";
 export async function POST(request: Request) {
   const { messages }: { messages: Message[] } = await request.json();
 
-  const pica = new Pica(process.env.PICA_SECRET_KEY as string);
+  const pica = new Pica(process.env.PICA_SECRET_KEY as string, {
+    connectors: ["*"] // Pass connector keys to allow access to
+  });
 
   const system = await pica.generateSystemPrompt();
 
@@ -18,8 +20,6 @@ export async function POST(request: Request) {
     messages: convertToCoreMessages(messages),
     maxSteps: 20,
   });
-
-  console.log(messages?.[1]?.parts);
 
   return (await stream).toDataStreamResponse();
 }
