@@ -36,8 +36,8 @@ export default function ExecuteCard({ results }: ExecuteCardProps) {
               <h2 className="text-sm font-semibold">Executed Actions</h2>
               <span className="text-xs text-muted-foreground">({results.length})</span>
             </div>
-            <Badge 
-              variant="outline" 
+            <Badge
+              variant="outline"
               className={`text-[10px] font-normal ${failedResults.length > 0 ? 'text-red-500' : 'text-primary'}`}
             >
               {failedResults.length > 0 ? `${successfulResults.length}/${results.length} Complete` : 'Complete'}
@@ -48,7 +48,7 @@ export default function ExecuteCard({ results }: ExecuteCardProps) {
           {successfulResults.length > 0 && (
             <div className="space-y-1.5 p-2 bg-emerald-500/5">
               {successfulResults.map((result, index) => (
-                <div 
+                <div
                   key={`success-${index}`}
                   className="flex flex-col gap-2 px-3 py-2 rounded-md bg-background/50 border border-emerald-500/20"
                 >
@@ -134,7 +134,7 @@ export default function ExecuteCard({ results }: ExecuteCardProps) {
           {failedResults.length > 0 && (
             <div className="space-y-1.5 p-2 bg-red-500/5">
               {failedResults.map((result, index) => (
-                <div 
+                <div
                   key={`error-${index}`}
                   className="flex flex-col gap-2 px-3 py-2 rounded-md bg-background/50 border border-red-500/20"
                 >
