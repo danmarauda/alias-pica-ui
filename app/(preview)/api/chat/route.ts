@@ -21,5 +21,5 @@ export async function POST(request: Request) {
     maxSteps: 20,
   });
 
-  return (await stream).toDataStreamResponse();
+  return stream.toDataStreamResponse();
 }
