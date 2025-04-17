@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   const system = await pica.generateSystemPrompt();
 
   const stream = streamText({
-    model: openai("gpt-4o"),
+    model: openai("gpt-4.1"),
     system,
     tools: {
       ...pica.oneTool,

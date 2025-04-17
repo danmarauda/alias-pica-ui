@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^1.3.0",
+    "@ai-sdk/openai": "^1.3.16",
     "@ai-sdk/react": "^1.1.16",
     "@nextui-org/react": "^2.6.11",
-    "@picahq/ai": "^2.4.3",
+    "@picahq/ai": "^2.4.8",
     "@picahq/authkit": "^1.0.0",
     "@picahq/authkit-node": "^1.0.1",
     "@radix-ui/react-scroll-area": "^1.2.3",
@@ -20,7 +20,7 @@
     "@types/prismjs": "^1.26.5",
     "@vercel/analytics": "^1.3.1",
     "@vercel/kv": "^2.0.0",
-    "ai": "^4.2.0",
+    "ai": "^4.3.9",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "d3-scale": "^4.0.2",
