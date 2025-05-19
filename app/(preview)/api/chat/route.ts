@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       ...pica.oneTool,
     },
     messages: convertToCoreMessages(messages),
-    maxSteps: 20,
+    maxSteps: 40,
   });
 
   return stream.toDataStreamResponse();

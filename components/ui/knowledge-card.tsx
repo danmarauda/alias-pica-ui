@@ -53,13 +53,13 @@ export default function KnowledgeCard({
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-2 gap-1.5 p-2 bg-emerald-500/5">
+          <div className="grid grid-cols-2 gap-1.5 p-2">
             {platformGroups &&
               Object.entries(platformGroups).map(
                 ([platformKey, platformActions]) => (
                   <div
                     key={platformKey}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-background/50 hover:bg-emerald-500/10 transition-colors group border border-emerald-500/20"
+                    className="flex items-center gap-2 px-2 py-[1px] rounded-md transition-colors group border text-xs"
                   >
                     <div className="flex h-7 w-7 items-center justify-center rounded-full bg-background/80 group-hover:bg-background/100">
                       <Image
