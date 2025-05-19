@@ -10,9 +10,9 @@ export function Header() {
           <div className="flex items-center gap-3">
             <a href="https://picaos.com" target="_blank">
               <Image
-                src="/logo-white.svg"
+                src="/solo-dark.svg"
                 alt="Pica Logo"
-                width={80}
+                width={20}
                 height={20}
               />
             </a>
