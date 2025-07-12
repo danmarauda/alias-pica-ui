@@ -2,7 +2,6 @@ import { Message } from "@/components/message";
 import { motion } from "framer-motion";
 import { ColorfulLoadingAnimation } from "@/components/loading-spinner";
 import { Message as MessageType } from "ai";
-import { suggestedActions } from "../constants/suggestedActions";
 import { useEffect, useRef } from "react";
 
 interface ChatMessagesProps {
@@ -34,11 +33,24 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
             </h1>
             <div className="flex flex-col gap-3 max-w-[600px] mx-auto">
               <p className="text-lg text-gray-400">
-                Connect your AI agents to 100+ APIs and tools with a single line
-                of code.
+                Experiment with Pica&apos;s integrations in an interactive environment.
               </p>
               <p className="text-sm text-gray-500">
-                Build powerful integrations and automate workflows instantly.
+                This{" "}
+                <a
+                  className="hover:underline text-gray-400"
+                  href="https://github.com/picahq/onetool-demo"
+                >
+                  interactive demo
+                </a>{" "}
+                showcases how you can build AI agents that interact with any
+                integration through Pica OneTool. Use this playground to
+                discover available integrations, understand their capabilities,
+                and test executing actions - all through natural language.
+              </p>
+              <p className="text-sm text-gray-500">
+                Connect your AI agents to 100+ APIs and tools with a single line
+                of code.
               </p>
             </div>
           </div>
@@ -92,7 +104,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
           </div>
         </>
       )}
-      
+
       {messages.length > 0 && (
         <div
           ref={messagesEndRef}
