@@ -29,7 +29,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
         <motion.div className="h-[350px] px-4 w-full md:w-[800px] md:px-0 pt-20">
           <div className="flex flex-col items-center justify-center gap-6 text-center">
             <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-              Pica OneTool Demo
+              OneTool Demo
             </h1>
             <div className="flex flex-col gap-3 max-w-[600px] mx-auto">
               <p className="text-lg text-gray-400">
@@ -49,7 +49,21 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                 and test executing actions - all through natural language.
               </p>
               <p className="text-sm text-gray-500">
-                Connect your AI agents to 100+ APIs and tools with a single line
+                Built as a demonstration using the{" "}
+                <a
+                  className="hover:underline text-gray-400"
+                  href="https://www.npmjs.com/package/ai"
+                >
+                  Vercel AI SDK
+                </a>{" "}
+                combined with{" "}
+                <a
+                  className="hover:underline text-gray-400"
+                  href="https://www.npmjs.com/package/@picahq/ai"
+                >
+                  Pica&apos;s Vercel AI SDK tools
+                </a>
+                , this interface shows how you can connect your AI agents to 100+ APIs and tools with a single line
                 of code.
               </p>
             </div>

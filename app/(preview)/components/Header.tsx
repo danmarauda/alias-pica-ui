@@ -12,8 +12,8 @@ export function Header() {
               <Image
                 src="/solo-dark.svg"
                 alt="Pica Logo"
-                width={20}
-                height={20}
+                width={70}
+                height={30}
               />
             </a>
 
@@ -40,7 +40,7 @@ export function Header() {
           </div>
         </div>
       </div>
-     
+
     </header>
   );
 }
