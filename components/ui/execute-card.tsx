@@ -46,11 +46,11 @@ export default function ExecuteCard({ results }: ExecuteCardProps) {
 
           {/* Successful Results */}
           {successfulResults.length > 0 && (
-            <div className="space-y-1.5 p-2 bg-emerald-500/5">
+            <div className="space-y-1.5 p-2">
               {successfulResults.map((result, index) => (
                 <div
                   key={`success-${index}`}
-                  className="flex flex-col gap-2 px-3 py-2 rounded-md bg-background/50 border border-emerald-500/20"
+                  className="flex flex-col gap-2 px-3 py-2 rounded-md bg-background/50 border"
                 >
                   <div className="flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80">

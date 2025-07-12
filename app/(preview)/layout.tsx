@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        <div className={`${GeistSans.className} flex min-h-screen bg-gradient-to-b from-emerald-900/20 to-black`}>
+        <div className={`${GeistSans.className} flex min-h-screen `}>
           <div className="max-w-[1200px] w-full mx-auto px-8">
             <Toaster position="top-center" richColors />
             {children}

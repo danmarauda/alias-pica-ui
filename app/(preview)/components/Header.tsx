@@ -10,9 +10,9 @@ export function Header() {
           <div className="flex items-center gap-3">
             <a href="https://picaos.com" target="_blank">
               <Image
-                src="/logo-white.svg"
+                src="/solo-dark.svg"
                 alt="Pica Logo"
-                width={80}
+                width={20}
                 height={20}
               />
             </a>
@@ -40,32 +40,7 @@ export function Header() {
           </div>
         </div>
       </div>
-      <div className="max-w-[800px] mx-auto w-full mt-4">
-        <div className="h-px w-full bg-green-800/20" />
-        <div className="flex items-center justify-between mt-3 px-1">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Join our community of</span>
-            <a
-              href="https://www.picaos.com/community"
-              target="_blank"
-              className="text-xs font-medium text-green-500 hover:underline"
-            >
-              passionate developers
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Used with</span>
-            <a
-              href="https://sdk.vercel.ai"
-              target="_blank"
-              className="flex items-center gap-1.5 text-gray-400 hover:text-green-500 transition-colors"
-            >
-              <VercelIcon size={13} />
-              <span className="text-xs">AI SDK</span>
-            </a>
-          </div>
-        </div>
-      </div>
+     
     </header>
   );
 }
