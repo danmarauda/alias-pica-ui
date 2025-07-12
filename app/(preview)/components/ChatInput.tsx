@@ -4,7 +4,6 @@ import { suggestedActions } from "../constants/suggestedActions";
 import { ChatRequestOptions } from "ai";
 import { CreateMessage } from "ai";
 import { Message } from "ai";
-import { useEffect } from "react";
 
 interface ChatInputProps {
   inputRef: RefObject<HTMLTextAreaElement | null>;
