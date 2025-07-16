@@ -58,7 +58,7 @@ export function ChatInput({
                     content: suggestedAction.action,
                   });
                 }}
-                className="w-full text-left bg-gray-500/10 hover:bg-gray-500/20 border border-emerald-800/20 hover:border-emerald-800/40 text-white rounded-lg p-3 text-sm transition-all duration-300 flex flex-col gap-1"
+                className="w-full text-left bg-gray-500/10 hover:bg-gray-500/20 text-white rounded-lg p-3 text-sm transition-all duration-300 flex flex-col gap-1"
               >
                 <span className="font-medium text-white/90">
                   {suggestedAction.title}

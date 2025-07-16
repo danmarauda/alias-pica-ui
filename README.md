@@ -10,7 +10,7 @@ A demo chat app showcasing Pica OneTool's capabilities. Built with [@picahq/ai](
 
 ## Features
 
-- 🔌 **Universal Integration**: Connect with 100+ APIs and use 6000+ actions powered by Pica
+- 🔌 **Universal Integration**: Connect with 130+ APIs and use 20,000+ actions powered by Pica
 - 🤖 **AI-Powered Assistant**: Natural language interface that understands your intent
 - 🧠 **Smart Execution**: Automatically handles prerequisite actions and complex workflows
 - 📊 **Knowledge Fetching**: Dynamically learns API capabilities and requirements

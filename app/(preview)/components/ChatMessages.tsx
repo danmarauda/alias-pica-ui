@@ -41,7 +41,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                   className="hover:underline text-gray-400"
                   href="https://github.com/picahq/onetool-demo"
                 >
-                  interactive demo
+                  demo app
                 </a>{" "}
                 showcases how you can build AI agents that interact with any
                 integration through Pica OneTool. Use this playground to
@@ -63,7 +63,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                 >
                   Pica&apos;s Vercel AI SDK tools
                 </a>
-                , this interface shows how you can connect your AI agents to 100+ APIs and tools with a single line
+                , this interface shows how you can connect your AI agents to 130+ APIs and 20,000+ tools with a single line
                 of code.
               </p>
             </div>
