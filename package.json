@@ -1,6 +1,6 @@
 {
   "name": "pica-one-tool-demo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -12,8 +12,8 @@
     "@ai-sdk/openai": "^1.3.22",
     "@ai-sdk/react": "^1.1.16",
     "@nextui-org/react": "^2.6.11",
-    "@picahq/ai": "^2.7.0",
-    "@picahq/authkit": "^1.0.1",
+    "@picahq/ai": "latest",
+    "@picahq/authkit": "latest",
     "@picahq/authkit-node": "^1.0.3",
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
