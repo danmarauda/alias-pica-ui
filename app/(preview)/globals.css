@@ -8,6 +8,10 @@
     background-image: radial-gradient(circle, var(--tw-gradient-stops));
   }
 
+  .animation-paused {
+    animation-play-state: paused !important;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -75,25 +79,25 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --background: 0 0% 0%;           /* #000000 - Pure black */
+    --foreground: 0 0% 100%;         /* #ffffff - White */
+    --card: 0 0% 0%;                 /* #000000 - Pure black */
+    --card-foreground: 0 0% 100%;    /* #ffffff - White */
+    --popover: 0 0% 0%;              /* #000000 */
+    --popover-foreground: 0 0% 100%; /* #ffffff */
+    --primary: 0 0% 100%;            /* #ffffff */
+    --primary-foreground: 0 0% 0%;   /* #000000 */
+    --secondary: 0 0% 10%;           /* #1a1a1a */
+    --secondary-foreground: 0 0% 100%; /* #ffffff */
+    --muted: 0 0% 10%;               /* #1a1a1a */
+    --muted-foreground: 0 0% 53%;    /* #888888 - Medium gray */
+    --accent: 0 0% 10%;              /* #1a1a1a */
+    --accent-foreground: 0 0% 100%;  /* #ffffff */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;              /* #333333 - Dark gray border */
+    --input: 0 0% 0%;                /* #000000 */
+    --ring: 0 0% 53%;                /* #888888 */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -113,6 +117,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -244,5 +252,91 @@
 
 .animate-scroll {
   animation: scroll 30s linear infinite;
+}
+
+/* Make DevTools panel embedded instead of fixed */
+.devtools-container .ai-devtools-panel {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  border: none !important;
+  border-right: 1px solid #333333 !important;
+}
+
+.devtools-container .ai-devtools-resize-handle {
+  display: none !important;
+}
+
+/* Change close button text to "Hide" */
+.devtools-container .ai-devtools-close-btn::after {
+  content: 'Hide' !important;
+  font-size: 10px !important;
+  color: #cccccc !important;
+}
+
+.devtools-container .ai-devtools-close-icon {
+  display: none !important;
+}
+
+/* Reorder DevTools header to put buttons above search */
+.devtools-container .ai-devtools-header {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  padding: 0 !important;
+}
+
+.devtools-container .ai-devtools-header-right {
+  order: -1 !important;
+  width: 100% !important;
+  justify-content: flex-end !important;
+  padding: 0.375rem 0.75rem !important;
+  border-bottom: 1px solid #333333 !important;
+}
+
+.devtools-container .ai-devtools-search-bar {
+  width: 100% !important;
+  padding: 0.375rem 0.75rem !important;
+  margin: 0 !important;
+}
+
+/* Hide scrollbars in search suggestions but keep scrolling */
+.devtools-container .ai-devtools-search-suggestions,
+.devtools-container .ai-devtools-search-suggestions *,
+.devtools-container .ai-devtools-suggestion-section,
+.devtools-container .ai-devtools-suggestion-options {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+.devtools-container .ai-devtools-search-suggestions::-webkit-scrollbar,
+.devtools-container .ai-devtools-search-suggestions *::-webkit-scrollbar,
+.devtools-container .ai-devtools-suggestion-section::-webkit-scrollbar,
+.devtools-container .ai-devtools-suggestion-options::-webkit-scrollbar {
+  display: none !important; /* Chrome/Safari */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Style scrollbars to be black for other areas */
+.devtools-container ::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.devtools-container ::-webkit-scrollbar-track {
+  background: #000000 !important;
+}
+
+.devtools-container ::-webkit-scrollbar-thumb {
+  background: #333333 !important;
+  border-radius: 4px !important;
+}
+
+.devtools-container ::-webkit-scrollbar-thumb:hover {
+  background: #555555 !important;
 }
 

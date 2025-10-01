@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 const config = {
   darkMode: "class",
   content: [
+    './src/cedar/components/**/*.{js,ts,jsx,tsx}',
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -74,8 +75,17 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        large: "var(--radius)",
       },
       keyframes: {
+        marquee: {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(-50%)",
+          },
+        },
         "scroll-left": {
           "0%": {
             transform: "translateX(0)",
@@ -160,6 +170,7 @@ const config = {
         },
       },
       animation: {
+        marquee: "marquee 40s linear infinite",
         "scroll-left": "scroll-left 30s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -175,7 +186,21 @@ const config = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"), 
+    require("tailwindcss-animate"),
+    function ({ addUtilities }: any) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }
+      })
+    }
   ],
 } satisfies Config;
 

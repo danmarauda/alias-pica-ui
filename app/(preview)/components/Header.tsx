@@ -1,53 +1,29 @@
-import Image from "next/image";
-import { GitHubIcon, HelpIcon } from "@/components/icons";
-import { ModelSelector } from "@/components/model-selector";
+import ProfileDropdown from "@/src/components/kokonutui/profile-dropdown";
 
-interface HeaderProps {
-  selectedModel: string;
-  onModelChange: (model: string) => void;
-}
+export function Header() {
+  const profileData = {
+    name: "Pica User",
+    email: "user@picaos.com",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=pica",
+    subscription: "PRO",
+    model: "Claude Sonnet 4.5",
+  };
 
-export function Header({ selectedModel, onModelChange }: HeaderProps) {
   return (
-    <header className="w-full pt-4 px-4 md:px-0 flex-none">
-      <div className="flex items-center justify-center max-w-[800px] mx-auto w-full">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-3">
-            <a href="https://picaos.com" target="_blank">
-              <Image
-                src="/solo-dark.svg"
-                alt="Pica Logo"
-                width={70}
-                height={30}
-              />
-            </a>
+    <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-card/50 backdrop-blur-sm">
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center">
+            <span className="text-white font-bold text-sm">P</span>
           </div>
-
-          <div className="flex items-center gap-4">
-            <ModelSelector selectedModel={selectedModel} onModelChange={onModelChange} />
-
-            <div className="flex items-center gap-2">
-              <a
-                href="https://github.com/picahq/ai"
-                target="_blank"
-                className="flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors text-xs"
-              >
-                <GitHubIcon size={16} />
-                <span>picahq/ai</span>
-              </a>
-              <div className="h-4 w-px bg-green-800/20" />
-              <a
-                href="https://docs.picaos.com/sdk/vercel-ai"
-                target="_blank"
-                className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors text-xs bg-green-900/20 px-2 py-1 rounded-md border border-green-800 hover:bg-green-900/40"
-              >
-                <HelpIcon size={14} />
-                <span>Docs</span>
-              </a>
-            </div>
+          <div>
+            <h1 className="text-sm font-semibold text-foreground">Pica OneTool</h1>
+            <p className="text-xs text-muted-foreground">150+ API Integrations</p>
           </div>
         </div>
       </div>
+
+      <ProfileDropdown data={profileData} />
     </header>
   );
 }

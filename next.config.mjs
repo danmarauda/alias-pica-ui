@@ -38,6 +38,18 @@ const nextConfig = {
           port: '',
           pathname: '/**',
         },
+        {
+          protocol: 'https',
+          hostname: 'api.dicebear.com',
+          port: '',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'ferf1mheo22r9ira.public.blob.vercel-storage.com',
+          port: '',
+          pathname: '/**',
+        },
       ],
     },
   };
